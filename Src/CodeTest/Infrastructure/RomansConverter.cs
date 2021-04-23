@@ -23,11 +23,6 @@ namespace CodeTest.Web.Infrastructure
             { 'M', 1000 }
         };
 
-        public RomansConverter()
-        {
-            
-        }
-
         public int FromNumeral(string input)
         {
             if (string.IsNullOrEmpty(input)) return 0;
