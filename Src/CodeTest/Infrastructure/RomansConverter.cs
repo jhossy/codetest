@@ -36,12 +36,24 @@ namespace CodeTest.Web.Infrastructure
 
             int calculatedResult = 0;
 
-            for(int i=0; i < input.Length; i++)
+            for(int i = 0; i < input.Length; i++)
             {
-                char current = input[i];
-                int foundValue = _numeralValues.ContainsKey(current) ? _numeralValues[current] : 0;
+                char currentChar = input[i];
+                int currentValue = _numeralValues.ContainsKey(currentChar) ? _numeralValues[currentChar] : 0;
 
-                calculatedResult += foundValue;
+                if (currentValue == 0) continue;
+
+                char nextChar = i < (input.Length - 1) ? input[i + 1] : ' ';
+                int nextValue = nextChar == ' ' ? 0 : _numeralValues[nextChar];
+
+                if (currentValue < nextValue)
+                {
+                    calculatedResult = calculatedResult - currentValue;
+                }
+                else
+                {
+                    calculatedResult = calculatedResult + currentValue;
+                }
             }
 
             return calculatedResult;
