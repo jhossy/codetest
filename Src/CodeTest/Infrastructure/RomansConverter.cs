@@ -7,7 +7,7 @@ namespace CodeTest.Web.Infrastructure
 {
     public interface IRomansConverter
     {
-        int FromNumeral(string numeral);
+        int FromNumeral(string input);
     }
 
     public class RomansConverter : IRomansConverter
@@ -28,9 +28,23 @@ namespace CodeTest.Web.Infrastructure
             
         }
 
-        public int FromNumeral(string numeral)
+        public int FromNumeral(string input)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(input)) return 0;
+
+            input = input.ToUpper();
+
+            int calculatedResult = 0;
+
+            for(int i=0; i < input.Length; i++)
+            {
+                char current = input[i];
+                int foundValue = _numeralValues.ContainsKey(current) ? _numeralValues[current] : 0;
+
+                calculatedResult += foundValue;
+            }
+
+            return calculatedResult;
         }
     }
 }
