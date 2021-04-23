@@ -36,14 +36,21 @@ namespace CodeTest.Web.Infrastructure
                 char currentChar = input[i];
                 int currentValue = _numeralValues.ContainsKey(currentChar) ? _numeralValues[currentChar] : 0;
 
-                if (currentValue == 0) continue;
-
-                char nextChar = i < (input.Length - 1) ? input[i + 1] : ' ';
-                int nextValue = nextChar == ' ' ? 0 : _numeralValues[nextChar];
-
-                if (currentValue < nextValue)
+                bool isNotLastChar = i + 1 < input.Length;
+                                
+                if(isNotLastChar)
                 {
-                    calculatedResult = calculatedResult - currentValue;
+                    char nextChar = input[i + 1];
+                    int nextValue = _numeralValues[nextChar];
+
+                    if (currentValue < nextValue)
+                    {
+                        calculatedResult = calculatedResult - currentValue;
+                    }
+                    else
+                    {
+                        calculatedResult = calculatedResult + currentValue;
+                    }
                 }
                 else
                 {
