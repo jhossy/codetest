@@ -1,4 +1,5 @@
-﻿using CodeTest.Web.Infrastructure;
+﻿using AutoFixture.Xunit2;
+using CodeTest.Web.Infrastructure;
 using CodeTest.Web.Infrastructure.Validation;
 using Moq;
 using System;
@@ -42,7 +43,7 @@ namespace CodeTest.Tests.Infrastructure
         [InlineData("C")]
         [InlineData("D")]
         [InlineData("M")]
-        public void ItShouldAcceptValidInput(string input)
+        public void ItShouldAcceptValidNumeral(string input)
         {
             //Arrange            
             Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
@@ -53,6 +54,32 @@ namespace CodeTest.Tests.Infrastructure
 
             //Assert
             Assert.True(result);
+        }
+
+        [Theory]
+        [InlineAutoData(true)]
+        [InlineAutoData(false)]
+        public void ItShouldReturnTrueIfAllValidationSucceeds(             
+            bool expected,
+            string input)
+        {
+            //Arrange            
+
+            Mock<IValidationRule<string>> mockRule = new Mock<IValidationRule<string>>();
+            mockRule.Setup(mockRule => mockRule.IsSatisfiedBy(input))
+                .Returns(expected);
+
+            Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
+            mockRuleProvider.Setup(mockRuleProvider => mockRuleProvider.GetRules())
+                .Returns(new IValidationRule<string>[] { mockRule.Object });
+
+            NumeralsValidator sut = new NumeralsValidator(mockRuleProvider.Object);
+
+            //Act
+            bool result = sut.Validate(input);
+
+            //Assert
+            Assert.True(result == expected);
         }
 
         [Theory]
