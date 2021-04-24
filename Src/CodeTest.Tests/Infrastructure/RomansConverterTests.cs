@@ -1,4 +1,5 @@
 ﻿using CodeTest.Web.Infrastructure;
+using FluentAssertions;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,9 @@ namespace CodeTest.Tests
         [InlineData("MCMXCVII", 1997)]
         [InlineData("MMMM", 4000)]
         [InlineData("", 0)]
-        public void ItShouldConvert(string input, int expected)
+        public void ItShouldConvert(
+            string input, 
+            int expected)
         {
             //Arrange
             RomansConverter sut = new RomansConverter();
@@ -49,7 +52,9 @@ namespace CodeTest.Tests
         [InlineData('C', 100)]
         [InlineData('D', 500)]
         [InlineData('M', 1000)]
-        public void ItShouldLookup(char letter, int expectedValue)
+        public void ItShouldLookup(
+            char letter, 
+            int expectedValue)
         {
             //Arrange
             RomansConverter sut = new RomansConverter();
@@ -87,6 +92,29 @@ namespace CodeTest.Tests
             //Assert
             Assert.True(result == 0);
 
+        }
+
+        [Theory]
+        [InlineData(1, "I")]
+        [InlineData(4, "IV")]
+        [InlineData(9, "IX")]
+        [InlineData(90, "XC")]
+        [InlineData(900, "CM")]
+        [InlineData(1903, "MCMIII")]
+        [InlineData(1997, "MCMXCVII")]
+        [InlineData(4000, "MMMM")]
+        public void ItShouldReturnNumeralFromValidDigit(
+            int digit, 
+            string expected)
+        {
+            //Arrange
+            RomansConverter sut = new RomansConverter();
+
+            //Act
+            string result = sut.ToNumeral(digit);
+
+            //Assert
+            expected.Should().BeEquivalentTo(result);
         }
 
         public static IEnumerable<object[]> InvalidRomanLetters

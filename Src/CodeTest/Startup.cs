@@ -1,4 +1,5 @@
 using CodeTest.Web.Infrastructure;
+using CodeTest.Web.Infrastructure.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace CodeTest
 
             services.AddScoped<IRomansConverter, RomansConverter>();
             services.AddScoped<INumeralsValidator, NumeralsValidator>();
+            services.AddScoped<IValidationRuleProvider, ValidationRuleProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

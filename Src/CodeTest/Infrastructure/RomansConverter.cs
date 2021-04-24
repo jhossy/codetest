@@ -78,5 +78,36 @@ namespace CodeTest.Web.Infrastructure
 
             return calculatedResult;
         }
+
+        public string ToNumeral(int input)
+        {
+            if (input >= 1000) return "M" + ToNumeral(input - 1000);
+
+            if (input >= 900) return "CM" + ToNumeral(input - 900);
+
+            if (input >= 500) return "D" + ToNumeral(input - 500);
+
+            if (input >= 400) return "CD" + ToNumeral(input - 400);
+
+            if (input >= 100) return "C" + ToNumeral(input - 100);
+
+            if (input >= 90) return "XC" + ToNumeral(input - 90);
+
+            if (input >= 50) return "L" + ToNumeral(input - 50);
+
+            if (input >= 15) return "VX" + ToNumeral(input - 15);
+
+            if (input >= 10) return "X" + ToNumeral(input - 10);
+
+            if (input >= 9) return "IX" + ToNumeral(input - 9);
+
+            if (input >= 5) return "V" + ToNumeral(input - 5);
+
+            if (input >= 4) return "IV" + ToNumeral(input - 4);
+
+            if (input >= 1) return "I" + ToNumeral(input - 1);
+
+            return string.Empty;
+        }
     }
 }
