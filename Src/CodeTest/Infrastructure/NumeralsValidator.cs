@@ -13,27 +13,22 @@ namespace CodeTest.Web.Infrastructure
     {
         private readonly char[] _validChars = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
 
-        private readonly IValidationRule<string>[] _validationRules;
+        private readonly IValidationRuleProvider _validationRuleProvider;
 
-        public NumeralsValidator()
+        public NumeralsValidator(IValidationRuleProvider validationRuleProvider)
         {
-            _validationRules = new IValidationRule<string>[] //TODO - replace with validation rule provider if time left
-            {
-                new NotFourSameLettersInARowRule(),
-                new NoRepetitionOfCertainNumerals()
-            };
+            _validationRuleProvider = validationRuleProvider ?? throw new ArgumentNullException(nameof(validationRuleProvider));
         }
 
         public bool Validate(string numeralInput)
         {
             if (_validChars.Any(ch => ch.ToString().Equals(numeralInput, StringComparison.InvariantCultureIgnoreCase))) return true;
 
-            foreach(IValidationRule<string> rule in _validationRules)
+            foreach(IValidationRule<string> rule in _validationRuleProvider.GetRules())
             {
-                if (rule.IsSatisfiedBy(numeralInput)) continue;
+                if (!rule.IsSatisfiedBy(numeralInput)) return false;
             }
-
-            return false;
+            return true;
         }
-    }
+    }    
 }

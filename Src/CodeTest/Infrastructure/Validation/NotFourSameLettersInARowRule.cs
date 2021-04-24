@@ -4,6 +4,8 @@
     {
         public bool IsSatisfiedBy(string candidate)
         {
+            if (candidate == null) return true;
+
             if (candidate.Length < 4) return true;
 
             candidate = candidate.ToUpper();

@@ -1,5 +1,6 @@
 ﻿using CodeTest.Web.Infrastructure;
 using CodeTest.Web.Infrastructure.Validation;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,30 @@ namespace CodeTest.Tests.Infrastructure
 {
     public class NumeralsValidatorTests
     {
+        [Fact]
+        public void ItShouldConstruct()
+        {
+            //Arrange
+            Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
+
+            //Act
+            NumeralsValidator sut = new NumeralsValidator(mockRuleProvider.Object);
+
+            //Assert
+            Assert.NotNull(sut);
+        }
+
+        [Fact]
+        public void ItShouldThrowWhenConstructing()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+            Assert.Throws<ArgumentNullException>(() => new NumeralsValidator(null));
+        }
+
         [Theory]
         [InlineData("I")]
         [InlineData("V")]
@@ -19,8 +44,9 @@ namespace CodeTest.Tests.Infrastructure
         [InlineData("M")]
         public void ItShouldAcceptValidInput(string input)
         {
-            //Arrange
-            NumeralsValidator sut = new NumeralsValidator();
+            //Arrange            
+            Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
+            NumeralsValidator sut = new NumeralsValidator(mockRuleProvider.Object);
 
             //Act
             bool result = sut.Validate(input);
@@ -39,6 +65,7 @@ namespace CodeTest.Tests.Infrastructure
         [InlineData("iiivi", true), InlineData("viii", true), InlineData("iiiiv", false), InlineData("viiii", false)]
         [InlineData("mmmm", true)]
         [InlineData("iIIv", true), InlineData("iiiiV", false)]
+        [InlineData(null, true)]
         public void ItShouldValidateFourLettersInARow(string input, bool expected)
         {
             //Arrange
@@ -57,10 +84,11 @@ namespace CodeTest.Tests.Infrastructure
         [InlineData("VVV", false)]
         [InlineData("vv", false), InlineData("ll", false), InlineData("dd", false)]
         [InlineData("ii", true), InlineData("xx", true), InlineData("mm", true)]
+        [InlineData(null, true)]
         public void ItShouldValidateRepetitionOfCertainChars(string input, bool expected)
         {
             //Arrange
-            NoRepetitionOfCertainNumerals sut = new NoRepetitionOfCertainNumerals();
+            NoRepetitionOfCertainNumeralsRule sut = new NoRepetitionOfCertainNumeralsRule();
 
             //Act
             bool result = sut.IsSatisfiedBy(input);
@@ -68,6 +96,20 @@ namespace CodeTest.Tests.Infrastructure
             //Assert
             Assert.True(result == expected);
         }
-        
+
+        [Theory]
+        [InlineData("", false), InlineData(" ", false)]
+        [InlineData(null, false)]
+        public void ItShouldValidateEmptyString(string input, bool expected)
+        {
+            //Arrange
+            NotEmptyStringRule sut = new NotEmptyStringRule();
+
+            //Act
+            bool result = sut.IsSatisfiedBy(input);
+
+            //Assert
+            Assert.True(result == expected);
+        }
     }
 }

@@ -2,12 +2,14 @@
 
 namespace CodeTest.Web.Infrastructure.Validation
 {
-    public class NoRepetitionOfCertainNumerals : IValidationRule<string>
+    public class NoRepetitionOfCertainNumeralsRule : IValidationRule<string>
     {
         private readonly char[] _allowedRepetitions = new char[] { 'I', 'X', 'M' };
 
         public bool IsSatisfiedBy(string candidate)
         {
+            if (candidate == null) return true;
+
             if (candidate.Length < 2) return true;
 
             candidate = candidate.ToUpper();
