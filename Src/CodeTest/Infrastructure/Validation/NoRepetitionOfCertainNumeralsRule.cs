@@ -2,7 +2,7 @@
 
 namespace CodeTest.Web.Infrastructure.Validation
 {
-    public class NoRepetitionOfCertainNumeralsRule : INumeralsValidationRule<string>
+    public class NoRepetitionOfCertainNumeralsRule : IValidationRule<string>
     {
         private readonly char[] _allowedRepetitions = new char[] { 'I', 'X', 'M' };
 

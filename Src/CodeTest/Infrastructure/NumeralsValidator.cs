@@ -24,7 +24,7 @@ namespace CodeTest.Web.Infrastructure
         {
             if (_validChars.Any(ch => ch.ToString().Equals(numeralInput, StringComparison.InvariantCultureIgnoreCase))) return true;
 
-            foreach(INumeralsValidationRule<string> rule in _validationRuleProvider.GetRules())
+            foreach(IValidationRule<string> rule in _validationRuleProvider.GetRules())
             {
                 if (!rule.IsSatisfiedBy(numeralInput)) return false;
             }
