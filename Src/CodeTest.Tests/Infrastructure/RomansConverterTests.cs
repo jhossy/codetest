@@ -117,6 +117,23 @@ namespace CodeTest.Tests
             expected.Should().BeEquivalentTo(result);
         }
 
+        [Theory]
+        [InlineData(-1, "")]
+        [InlineData(0, "")]
+        public void ItShouldReturnEmptyStringIfInvalidInput(
+            int digit,
+            string expected)
+        {
+            //Arrange
+            RomansConverter sut = new RomansConverter();
+
+            //Act
+            string result = sut.ToNumeral(digit);
+
+            //Assert
+            expected.Should().BeEquivalentTo(result);
+        }
+
         public static IEnumerable<object[]> InvalidRomanLetters
         {
             get
