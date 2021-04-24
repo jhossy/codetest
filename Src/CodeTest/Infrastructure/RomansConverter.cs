@@ -5,6 +5,8 @@ namespace CodeTest.Web.Infrastructure
     public interface IRomansConverter
     {
         int FromNumeral(string input);
+
+        string ToNumeral(int input);
     }
 
     public class RomansConverter : IRomansConverter

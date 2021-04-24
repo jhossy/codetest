@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CodeTest.Web.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,18 @@ namespace CodeTest.Web.Controllers
     [ApiController]
     public class DigitsController : ControllerBase
     {
+        private readonly IRomansConverter _romansConverter;
+        public DigitsController(IRomansConverter romansConverter)
+        {
+            _romansConverter = romansConverter ?? throw new ArgumentNullException(nameof(romansConverter));
+        }
+
         [HttpGet]
         public ActionResult DigitToNumerals(int input)
         {
-            return Ok(input);
+            if (input <= 0) return BadRequest();
+
+            return Ok(_romansConverter.ToNumeral(input));
         }
     }
 }
