@@ -65,13 +65,13 @@ namespace CodeTest.Tests.Infrastructure
         {
             //Arrange            
 
-            Mock<IValidationRule<string>> mockRule = new Mock<IValidationRule<string>>();
+            Mock<INumeralsValidationRule<string>> mockRule = new Mock<INumeralsValidationRule<string>>();
             mockRule.Setup(mockRule => mockRule.IsSatisfiedBy(input))
                 .Returns(expected);
 
             Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
             mockRuleProvider.Setup(mockRuleProvider => mockRuleProvider.GetRules())
-                .Returns(new IValidationRule<string>[] { mockRule.Object });
+                .Returns(new INumeralsValidationRule<string>[] { mockRule.Object });
 
             NumeralsValidator sut = new NumeralsValidator(mockRuleProvider.Object);
 

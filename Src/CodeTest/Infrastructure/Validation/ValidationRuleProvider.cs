@@ -2,14 +2,14 @@
 {
     public interface IValidationRuleProvider
     {
-        IValidationRule<string>[] GetRules();
+        INumeralsValidationRule<string>[] GetRules();
     }
 
     public class ValidationRuleProvider : IValidationRuleProvider
     {
-        public IValidationRule<string>[] GetRules()
+        public INumeralsValidationRule<string>[] GetRules()
         {
-            return new IValidationRule<string>[]
+            return new INumeralsValidationRule<string>[]
             {
                 new NotFourSameLettersInARowRule(),
                 new NoRepetitionOfCertainNumeralsRule(),

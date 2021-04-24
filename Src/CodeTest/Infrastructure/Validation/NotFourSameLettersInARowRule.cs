@@ -1,6 +1,6 @@
 ﻿namespace CodeTest.Web.Infrastructure.Validation
 {
-    public class NotFourSameLettersInARowRule : IValidationRule<string>
+    public class NotFourSameLettersInARowRule : INumeralsValidationRule<string>
     {
         public bool IsSatisfiedBy(string candidate)
         {

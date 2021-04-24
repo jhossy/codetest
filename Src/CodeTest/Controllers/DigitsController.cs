@@ -21,7 +21,7 @@ namespace CodeTest.Web.Controllers
         [HttpGet]
         public ActionResult DigitToNumerals(int input)
         {
-            if (input <= 0) return BadRequest();
+            if (input <= 0 || input > 4000) return BadRequest();
 
             return Ok(_romansConverter.ToNumeral(input));
         }

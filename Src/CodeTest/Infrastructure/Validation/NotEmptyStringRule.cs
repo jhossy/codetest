@@ -1,6 +1,6 @@
 ﻿namespace CodeTest.Web.Infrastructure.Validation
 {
-    public class NotEmptyStringRule : IValidationRule<string>
+    public class NotEmptyStringRule : INumeralsValidationRule<string>
     {
         public bool IsSatisfiedBy(string candidate)
         {
