@@ -12,16 +12,28 @@ namespace CodeTest.Web.Infrastructure
 
     public class RomansConverter : IRomansConverter
     {
-        private readonly Dictionary<char, int> _numeralValues = new Dictionary<char, int>()
+        internal int LookupChar(char input)
         {
-            { 'I', 1 },
-            { 'V', 5 },
-            { 'X', 10 },
-            { 'L', 50 },
-            { 'C', 100 },
-            { 'D', 500 },
-            { 'M', 1000 }
-        };
+            switch (input)
+            {
+                case 'I':
+                    return 1;
+                case 'V':
+                    return 5;
+                case 'X':
+                    return 10;
+                case 'L':
+                    return 50;
+                case 'C':
+                    return 100;
+                case 'D':
+                    return 500;
+                case 'M':
+                    return 1000;
+                default:
+                    throw new ArgumentException("Invalid input char");
+            }
+        }
 
         public int FromNumeral(string input)
         {
@@ -31,31 +43,39 @@ namespace CodeTest.Web.Infrastructure
 
             int calculatedResult = 0;
 
-            for(int i = 0; i < input.Length; i++)
+            try
             {
-                char currentChar = input[i];
-                int currentValue = _numeralValues.ContainsKey(currentChar) ? _numeralValues[currentChar] : 0;
-
-                bool isNotLastChar = i + 1 < input.Length;
-                                
-                if(isNotLastChar)
+                for (int i = 0; i < input.Length; i++)
                 {
-                    char nextChar = input[i + 1];
-                    int nextValue = _numeralValues[nextChar];
+                    char currentChar = input[i];
+                    int currentValue = LookupChar(currentChar);
 
-                    if (currentValue < nextValue)
+                    bool isNotLastChar = i + 1 < input.Length;
+
+                    if (isNotLastChar)
                     {
-                        calculatedResult = calculatedResult - currentValue;
+                        char nextChar = input[i + 1];
+                        int nextValue = LookupChar(nextChar);
+
+                        if (currentValue < nextValue)
+                        {
+                            calculatedResult = calculatedResult - currentValue;
+                        }
+                        else
+                        {
+                            calculatedResult = calculatedResult + currentValue;
+                        }
                     }
                     else
                     {
                         calculatedResult = calculatedResult + currentValue;
                     }
                 }
-                else
-                {
-                    calculatedResult = calculatedResult + currentValue;
-                }
+            }
+            catch(ArgumentException ae)
+            {
+                //log error
+                calculatedResult = 0;
             }
 
             return calculatedResult;
