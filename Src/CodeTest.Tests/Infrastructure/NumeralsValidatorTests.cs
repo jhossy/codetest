@@ -15,7 +15,7 @@ namespace CodeTest.Tests.Infrastructure
         public void ItShouldConstruct()
         {
             //Arrange
-            Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
+            Mock<IValidationRuleProvider<string>> mockRuleProvider = new Mock<IValidationRuleProvider<string>>();
 
             //Act
             NumeralsValidator sut = new NumeralsValidator(mockRuleProvider.Object);
@@ -46,7 +46,7 @@ namespace CodeTest.Tests.Infrastructure
         public void ItShouldAcceptValidNumeral(string input)
         {
             //Arrange            
-            Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
+            Mock<IValidationRuleProvider<string>> mockRuleProvider = new Mock<IValidationRuleProvider<string>>();
             NumeralsValidator sut = new NumeralsValidator(mockRuleProvider.Object);
 
             //Act
@@ -69,7 +69,7 @@ namespace CodeTest.Tests.Infrastructure
             mockRule.Setup(mockRule => mockRule.IsSatisfiedBy(input))
                 .Returns(expected);
 
-            Mock<IValidationRuleProvider> mockRuleProvider = new Mock<IValidationRuleProvider>();
+            Mock<IValidationRuleProvider<string>> mockRuleProvider = new Mock<IValidationRuleProvider<string>>();
             mockRuleProvider.Setup(mockRuleProvider => mockRuleProvider.GetRules())
                 .Returns(new IValidationRule<string>[] { mockRule.Object });
 

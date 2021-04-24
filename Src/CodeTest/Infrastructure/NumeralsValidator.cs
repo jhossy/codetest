@@ -13,9 +13,9 @@ namespace CodeTest.Web.Infrastructure
     {
         private readonly char[] _validChars = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
 
-        private readonly IValidationRuleProvider _validationRuleProvider;
+        private readonly IValidationRuleProvider<string> _validationRuleProvider;
 
-        public NumeralsValidator(IValidationRuleProvider validationRuleProvider)
+        public NumeralsValidator(IValidationRuleProvider<string> validationRuleProvider)
         {
             _validationRuleProvider = validationRuleProvider ?? throw new ArgumentNullException(nameof(validationRuleProvider));
         }

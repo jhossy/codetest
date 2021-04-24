@@ -24,7 +24,8 @@ namespace CodeTest
 
             services.AddScoped<IRomansConverter, RomansConverter>();
             services.AddScoped<INumeralsValidator, NumeralsValidator>();
-            services.AddScoped<IValidationRuleProvider, ValidationRuleProvider>();
+            services.AddScoped<IValidationRuleProvider<string>, ValidationRuleProvider>();
+            services.AddScoped<IValidationRuleProvider<int>, DigitsRuleProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

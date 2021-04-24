@@ -1,11 +1,11 @@
 ﻿namespace CodeTest.Web.Infrastructure.Validation
 {
-    public interface IValidationRuleProvider
+    public interface IValidationRuleProvider<T>
     {
-        IValidationRule<string>[] GetRules();
+        IValidationRule<T>[] GetRules();
     }
 
-    public class ValidationRuleProvider : IValidationRuleProvider
+    public class ValidationRuleProvider : IValidationRuleProvider<string>
     {
         public IValidationRule<string>[] GetRules()
         {
@@ -14,6 +14,17 @@
                 new NotFourSameLettersInARowRule(),
                 new NoRepetitionOfCertainNumeralsRule(),
                 new NotEmptyStringRule()
+            };
+        }
+    }
+
+    public class DigitsRuleProvider : IValidationRuleProvider<int>
+    {
+        public IValidationRule<int>[] GetRules()
+        {
+            return new IValidationRule<int>[]
+            {
+                new NotZeroOrNegativeDigitRule()
             };
         }
     }
