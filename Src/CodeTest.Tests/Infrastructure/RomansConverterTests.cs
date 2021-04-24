@@ -1,4 +1,5 @@
 ﻿using CodeTest.Web.Infrastructure;
+using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -73,19 +74,20 @@ namespace CodeTest.Tests
             Assert.Throws<ArgumentException>(() => sut.LookupChar(letter));
         }
 
-        //[Theory]
-        //[MemberData(nameof(InvalidRomanLetters))]
-        //public void ItShouldReturn0IfThrowing(char letter)
-        //{
-        //    //Arrange
-        //    Mock<RomansConverter> sut = new RomansConverter();
+        [Theory]
+        [MemberData(nameof(InvalidRomanLetters))]
+        public void ItShouldReturn0IfInvalidChar(char letter)
+        {
+            //Arrange
+            RomansConverter sut = new RomansConverter();
 
-        //    //Act
-        //    int result = sut.LookupChar(letter);
+            //Act
+            int result = sut.FromNumeral(letter.ToString());
 
-        //    //Assert
-            
-        //}
+            //Assert
+            Assert.True(result == 0);
+
+        }
 
         public static IEnumerable<object[]> InvalidRomanLetters
         {

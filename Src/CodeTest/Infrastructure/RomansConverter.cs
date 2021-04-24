@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CodeTest.Web.Infrastructure
 {
@@ -74,7 +71,8 @@ namespace CodeTest.Web.Infrastructure
             }
             catch(ArgumentException ae)
             {
-                //log error
+                //log error to logfile, but here we just print it
+                Console.Out.WriteLine(ae.Message);
                 calculatedResult = 0;
             }
 
