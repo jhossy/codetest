@@ -24,6 +24,7 @@ namespace CodeTest
 
             services.AddScoped<IRomansConverter, RomansConverter>();
             services.AddScoped<INumeralsValidator, NumeralsValidator>();
+            services.AddScoped<IDigitsValidator, DigitsValidator>();
             services.AddScoped<IValidationRuleProvider<string>, ValidationRuleProvider>();
             services.AddScoped<IValidationRuleProvider<int>, DigitsRuleProvider>();
         }

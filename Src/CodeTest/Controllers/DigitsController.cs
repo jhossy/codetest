@@ -1,10 +1,6 @@
 ﻿using CodeTest.Web.Infrastructure;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CodeTest.Web.Controllers
 {
@@ -12,16 +8,21 @@ namespace CodeTest.Web.Controllers
     [ApiController]
     public class DigitsController : ControllerBase
     {
-        private readonly IRomansConverter _romansConverter;
-        public DigitsController(IRomansConverter romansConverter)
+        private readonly IDigitsValidator _digitsValidator;
+        private readonly IRomansConverter _romansConverter;        
+
+        public DigitsController(
+            IDigitsValidator digitsValidator,
+            IRomansConverter romansConverter)
         {
+            _digitsValidator = digitsValidator ?? throw new ArgumentNullException(nameof(digitsValidator));
             _romansConverter = romansConverter ?? throw new ArgumentNullException(nameof(romansConverter));
         }
 
         [HttpGet]
         public ActionResult DigitToNumerals(int input)
         {
-            if (input <= 0 || input > 4000) return BadRequest();
+            if (!_digitsValidator.Validate(input)) return BadRequest();
 
             return Ok(_romansConverter.ToNumeral(input));
         }

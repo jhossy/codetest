@@ -8,15 +8,15 @@ namespace CodeTest.Web.Controllers
     [ApiController]
     public class NumeralsController : ControllerBase
     {
-        private readonly IRomansConverter _romansConverter;
         private readonly INumeralsValidator _numeralsValidator;
+        private readonly IRomansConverter _romansConverter;        
 
         public NumeralsController(
-            IRomansConverter romansConverter,
-            INumeralsValidator numeralsValidator)
-        {
-            _romansConverter = romansConverter ?? throw new ArgumentNullException(nameof(romansConverter));
+            INumeralsValidator numeralsValidator,
+            IRomansConverter romansConverter)
+        {            
             _numeralsValidator = numeralsValidator ?? throw new ArgumentNullException(nameof(numeralsValidator));
+            _romansConverter = romansConverter ?? throw new ArgumentNullException(nameof(romansConverter));
         }
 
         [HttpGet]

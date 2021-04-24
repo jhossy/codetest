@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CodeTest.Web.Infrastructure.Validation
+﻿namespace CodeTest.Web.Infrastructure.Validation
 {
     public class NotZeroOrNegativeDigitRule : IValidationRule<int>
     {
