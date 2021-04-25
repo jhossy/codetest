@@ -30,7 +30,7 @@ namespace CodeTest.Tests.IntegrationTests
         [InlineData("MCMIII", "1903")]
         [InlineData("MCMXCVII", "1997")]
         [InlineData("MMMM", "4000")]
-        public async Task ItShouldConvertDigitToNumeral(
+        public async Task ItShouldConvertNumeralToDigit(
             string numeral,
             string expected) 
         {
