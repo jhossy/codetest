@@ -6,7 +6,7 @@ Two endpoints exists:
 
    - /api/numerals/MCMIII 
       - returns 200 OK and the corresponding digit from any given valid Roman numeral.
-      - returns 400 bad request and "0" from any invalid input
+      - returns 400 bad request and "Invalid input" from any invalid input (Invalid characters and various validation rules - see code)
    - /api/digits/1903
       - returns 200 OK and the corresponding numeral from any given valid digit (1 - 4000).
-      - returns 400 bad request and "" from any invalid input (-1, 0)
+      - returns 400 bad request and "Invalid input" from any invalid input (-1, 0)
