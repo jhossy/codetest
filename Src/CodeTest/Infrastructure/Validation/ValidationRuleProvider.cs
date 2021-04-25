@@ -13,7 +13,8 @@
             {
                 new NotFourSameLettersInARowRule(),
                 new NoRepetitionOfCertainNumeralsRule(),
-                new NotEmptyStringRule()
+                new NotEmptyStringRule(),
+                new NotOtherCharsThanRoman()
             };
         }
     }

@@ -45,5 +45,27 @@ namespace CodeTest.Tests.IntegrationTests
             Assert.True(response.StatusCode == HttpStatusCode.OK);
             Assert.True(responseString == expected);
         }
+
+        [Theory]
+        [InlineData("A", "0")]
+        [InlineData("a", "0")]
+        [InlineData("!#&(/=", "0")]
+        [InlineData("-1", "0")]
+        [InlineData("0", "0")]
+        public async Task ItShouldHandleEdgeCasesGracefully(
+            string numeral,
+            string expected)
+        {
+            //Arrange
+
+            //Act
+            HttpResponseMessage response = await _client.GetAsync($"/api/numerals?input={numeral}");
+
+            string responseString = await response.Content.ReadAsStringAsync();
+
+            //Assert
+            Assert.True(response.StatusCode == HttpStatusCode.BadRequest);
+            Assert.True(responseString == expected);
+        }
     }
 }
