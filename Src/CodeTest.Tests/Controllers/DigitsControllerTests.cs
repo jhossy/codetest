@@ -52,7 +52,7 @@ namespace CodeTest.Tests.Controllers
             DigitsController sut = new DigitsController(mockDigitsValidator.Object, mockRomansConverter.Object);
 
             //Act
-            IActionResult result = sut.DigitToNumerals(input);
+            IActionResult result = sut.Get(input);
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(result);
@@ -73,7 +73,7 @@ namespace CodeTest.Tests.Controllers
             DigitsController sut = new DigitsController(mockDigitsValidator.Object, mockRomansConverter.Object);
 
             //Act
-            IActionResult result = sut.DigitToNumerals(input);
+            IActionResult result = sut.Get(input);
 
             //Assert
             Assert.IsType<OkObjectResult>(result);

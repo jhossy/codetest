@@ -36,7 +36,7 @@ namespace CodeTest.Tests.IntegrationTests
             //Arrange
 
             //Act
-            HttpResponseMessage response = await _client.GetAsync($"/api/digits?input={digit}");
+            HttpResponseMessage response = await _client.GetAsync($"/api/digits/{digit}");
             response.EnsureSuccessStatusCode();
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -55,7 +55,7 @@ namespace CodeTest.Tests.IntegrationTests
             //Arrange
 
             //Act
-            HttpResponseMessage response = await _client.GetAsync($"/api/digits?input={digit}");
+            HttpResponseMessage response = await _client.GetAsync($"/api/digits/{digit}");
             
             string responseString = await response.Content.ReadAsStringAsync();
 

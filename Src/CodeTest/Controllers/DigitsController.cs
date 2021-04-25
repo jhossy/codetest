@@ -19,8 +19,8 @@ namespace CodeTest.Web.Controllers
             _romansConverter = romansConverter ?? throw new ArgumentNullException(nameof(romansConverter));
         }
 
-        [HttpGet]
-        public ActionResult DigitToNumerals(int input)
+        [HttpGet("{input}")]
+        public ActionResult Get(int input)
         {
             if (!_digitsValidator.Validate(input)) return BadRequest("Invalid input");
 

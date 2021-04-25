@@ -52,7 +52,7 @@ namespace CodeTest.Tests.Controllers
             NumeralsController sut = new NumeralsController(mockNumeralsValidator.Object, mockRomansConverter.Object);
 
             //Act
-            IActionResult result = sut.NumeralsToDigits(input);
+            IActionResult result = sut.Get(input);
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(result);
@@ -73,7 +73,7 @@ namespace CodeTest.Tests.Controllers
             NumeralsController sut = new NumeralsController(mockNumeralsValidator.Object, mockRomansConverter.Object);
 
             //Act
-            IActionResult result = sut.NumeralsToDigits(input);
+            IActionResult result = sut.Get(input);
 
             //Assert
             Assert.IsType<OkObjectResult>(result);
