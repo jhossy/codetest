@@ -44,11 +44,11 @@ namespace CodeTest.Tests.IntegrationTests
         }
 
         [Theory]
-        [InlineData("A", "0")]
-        [InlineData("a", "0")]
-        [InlineData("!#&(/=", "0")]
-        [InlineData("-1", "0")]
-        [InlineData("0", "0")]
+        [InlineData("A", "Invalid input")]
+        [InlineData("a", "Invalid input")]
+        [InlineData("!#&(/=", "Invalid input")]
+        [InlineData("-1", "Invalid input")]
+        [InlineData("0", "Invalid input")]
         public async Task ItShouldHandleEdgeCasesGracefully(
             string numeral,
             string expected)

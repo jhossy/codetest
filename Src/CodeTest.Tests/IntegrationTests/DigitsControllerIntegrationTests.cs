@@ -46,8 +46,8 @@ namespace CodeTest.Tests.IntegrationTests
         }
 
         [Theory]
-        [InlineData(-1, "")]
-        [InlineData(0, "")]
+        [InlineData(-1, "Invalid input")]
+        [InlineData(0, "Invalid input")]
         public async Task ItShouldHandleEdgeCasesGracefully(
             int digit,
             string expected)

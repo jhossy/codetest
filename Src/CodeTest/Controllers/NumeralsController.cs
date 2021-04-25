@@ -24,7 +24,7 @@ namespace CodeTest.Web.Controllers
         {
             bool isValidInput = _numeralsValidator.Validate(input);
 
-            if (!isValidInput) return BadRequest("0");
+            if (!isValidInput) return BadRequest("Invalid input");
 
             return Ok(_romansConverter.FromNumeral(input));
         }

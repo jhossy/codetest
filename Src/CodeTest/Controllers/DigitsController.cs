@@ -22,7 +22,7 @@ namespace CodeTest.Web.Controllers
         [HttpGet]
         public ActionResult DigitToNumerals(int input)
         {
-            if (!_digitsValidator.Validate(input)) return BadRequest("");
+            if (!_digitsValidator.Validate(input)) return BadRequest("Invalid input");
 
             return Ok(_romansConverter.ToNumeral(input));
         }
