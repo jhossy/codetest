@@ -4,7 +4,7 @@
     {
         public bool IsSatisfiedBy(int candidate)
         {
-            return candidate > 1 && candidate < 4001;
+            return candidate > 0 && candidate < 4001;
         }
     }
 }
