@@ -14,7 +14,8 @@
                 new NotFourSameLettersInARowRule(),
                 new NoRepetitionOfCertainNumeralsRule(),
                 new NotEmptyStringRule(),
-                new NotOtherCharsThanRoman()
+                new NotOtherCharsThanRomanRule(),
+                new NotMoreThanMinMaxNumeralRule()
             };
         }
     }
@@ -25,7 +26,8 @@
         {
             return new IValidationRule<int>[]
             {
-                new NotZeroOrNegativeDigitRule()
+                new NotZeroOrNegativeDigitRule(),
+                new NotMoreThanMinMaxDigitRule()
             };
         }
     }
