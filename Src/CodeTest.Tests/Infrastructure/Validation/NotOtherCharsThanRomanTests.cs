@@ -1,7 +1,4 @@
 ﻿using CodeTest.Web.Infrastructure.Validation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace CodeTest.Tests.Infrastructure.Validation
