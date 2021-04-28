@@ -97,7 +97,7 @@ namespace CodeTest.Web.Infrastructure
 
             if (input >= 50) return "L" + ToNumeral(input - 50);
 
-            if (input >= 15) return "VX" + ToNumeral(input - 15);
+            if (input >= 40) return "XL" + ToNumeral(input - 40);
 
             if (input >= 10) return "X" + ToNumeral(input - 10);
 
